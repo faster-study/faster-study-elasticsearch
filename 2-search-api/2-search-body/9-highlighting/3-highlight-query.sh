@@ -1,0 +1,20 @@
+#!/bin/bash
+#可以指定highlight_query字段，在查询之后的高亮处理阶段通过额外的信息来判断是否展示高亮片段。
+curl -X GET 'localhost:9200/test_highlighting/_search?pretty' -H 'content-type:application/json' -d '{
+    "query":{
+        "match":{
+            "content":"今天"
+        }
+    },
+    "highlight":{
+        "fields":{
+            "content":{
+                "highlight_query":{
+                    "match":{
+                        "content":"天气"
+                    }
+                }
+            }
+        }
+    }
+}'
