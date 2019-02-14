@@ -15,5 +15,5 @@ curl -X GET 'localhost:9200/test_highlighting/_search?pretty' -H 'content-type:a
 
 # skip_duplicates: 跳过重复的建议，在completion节点内部
 # size:设置每个建议返回的数量，在completion节点内部
-# 可以使用fuzzy设置模糊查询，在completion节点内部
+# 可以使用fuzzy启用拼写错误时纠正，在completion节点内部
 # 可以使用regex节点，设置正则匹配，替换prefix
