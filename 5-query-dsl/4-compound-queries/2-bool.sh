@@ -1,0 +1,29 @@
+#!/bin/bash
+#bool查询可以组合多个bool类型的查询进行匹配文档。可选类型如下：
+#must:如果有多个条件，必须都满足
+#filter:过滤掉不满足的，过程不会计算分数
+#should:如果有多个条件，满足多个或一个都可以，
+#must_not:与must相反，必须不满足
+curl -X GET 'localhost:9200/search_test/_search?pretty' -H 'content-type:application/json' -d '{
+    "query":{
+        "bool":{
+            "must":[
+                {
+                    "term":{
+                        "message":"this"
+                    }
+                },
+                {
+                    "term":{
+                        "message":"is"
+                    }
+                }
+            ],
+            "filter":{
+                "term":{
+                    "name":"1007"
+                }
+            }
+        }
+    }
+}'
