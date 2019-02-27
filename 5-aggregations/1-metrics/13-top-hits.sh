@@ -1,0 +1,20 @@
+#!/bin/bash
+#top_hits主要用于子聚合，可以针对bucketing聚合，对每个桶下的数据进行排序、获取前几个等操作。
+curl -X GET 'localhost:9200/test_metric/_search?pretty' -H 'content-type:application/json' -d '{
+    "size":0,
+    "aggs":{
+        "test_group":{
+            "terms":{
+                "field":"weight"
+            },
+            "aggs":{
+                "test_top_hits":{
+                    "top_hits":{
+                        "size":2,
+                        "sort":{"grade":"desc"}
+                    }
+                }
+            }
+        }
+    }
+}'
